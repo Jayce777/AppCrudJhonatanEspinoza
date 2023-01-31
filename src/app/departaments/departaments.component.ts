@@ -1,7 +1,6 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { AppToastService } from '../toast/toast.service';
 import {DepartamentService} from './departaments.service';
 import{DepartamentsDTO,DepartamentsUpdateDTO} from './Departament';
 import { Router } from '@angular/router';
@@ -17,6 +16,7 @@ import {EnterpriseService}from '../enterprise/enterprises.service';
 export class DepartamentsComponent  implements OnInit {
 
   dataEnterprise: any;
+  dataDepartaments:any;
   dataCount: number = 0;
 
   nameEnterprise:string='';
@@ -61,7 +61,7 @@ export class DepartamentsComponent  implements OnInit {
 
   constructor(private departamentService: DepartamentService,
     private enterpriseService: EnterpriseService, private router: Router,
-    private modalService: NgbModal,public toastService: AppToastService) { }
+    private modalService: NgbModal) { }
 
   ngOnInit(): void {
 
@@ -73,7 +73,7 @@ export class DepartamentsComponent  implements OnInit {
       .subscribe(
         response => {
           const { data } = response;
-          this.dataEnterprise = data;
+          this.dataDepartaments = data;
           this.dataCount = data.lenght;
 
           console.log(data);

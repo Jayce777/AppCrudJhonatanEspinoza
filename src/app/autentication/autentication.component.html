@@ -1,5 +1,4 @@
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
 
 <section class="vh-100">
@@ -19,10 +18,11 @@
           
               <div class="form-outline mb-4">
                 <label for="password">Password: </label>
-              <input [(ngModel)]="password" id="password" type="text" formControlName="password" class="form-control form-control-lg">
+              <input [(ngModel)]="password" id="password" type="password" formControlName="password" class="form-control form-control-lg">
               </div>
               <p id="messageLogin" *ngIf="loginValid==false">{{messageCannotLogin}}</p>
               <button class="btn btn-primary btn-lg btn-block" type="submit" [disabled]="!loginForm.valid">Login</button>
+              <a class="btn btn-success btn-lg btn-block" routerLink="register">Register</a>
 
             </form>
            

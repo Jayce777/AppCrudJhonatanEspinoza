@@ -17,6 +17,7 @@ const httpOptions = {
 @Injectable()
 export class AuthService {
   autenticationUrl: string = 'https://localhost:7203/api/autentication/login';
+  registerUrl: string = 'https://localhost:7203/api/autentication/register';
 
 
   constructor(private http: HttpClient) {
@@ -28,6 +29,11 @@ export class AuthService {
     console.warn(login);
 
     return this.http.post<ResponseAutentication>(this.autenticationUrl, login, httpOptions);
+  }
+
+  register(login: Login): Observable<ResponseAutentication> {
+
+    return this.http.post<ResponseAutentication>(this.registerUrl, login, httpOptions);
   }
 
   isAuteticated() {

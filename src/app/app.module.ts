@@ -14,11 +14,12 @@ import { DataTablesModule } from "angular-datatables";
 
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ToastComponent } from './toast/toast.component';
+import { RegisterComponent } from './register/register.component';
 
 
 const routes: Routes = [
   { path: '', component: AutenticationComponent },
+  { path: 'register', component: RegisterComponent },
   { path: 'layout', component: LayoutComponent },
   { path: 'enterprises', component: EnterpriseComponent },
   { path: 'departaments', component: DepartamentsComponent },
@@ -30,7 +31,7 @@ const routes: Routes = [
 
 const routes1: Routes = [
   { path: '', component: AutenticationComponent },
-
+  { path: 'register', component: RegisterComponent },
   {
     path: 'layout', component: LayoutComponent, children: [
 
@@ -63,7 +64,7 @@ const routes1: Routes = [
     AutenticationComponent,
     DepartamentsComponent,
     EmployeesComponent,
-    ToastComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,

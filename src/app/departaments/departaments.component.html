@@ -1,5 +1,4 @@
-<ngb-toast *ngFor="let toast of toastService.toasts" [header]="toast.header" [autohide]="true"
-    [delay]="toast.delay || 5000" (hiddden)="toastService.remove(toast)">{{toast.body}}</ngb-toast>
+
 
 
 <div class="container">
@@ -137,7 +136,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr   *ngFor="let departament of dataEnterprise;let i=index">
+      <tr   *ngFor="let departament of dataDepartaments;let i=index">
        <td>{{departament.id}}</td>
        <td>{{departament.name}}</td>
        <td>{{departament.phone}}</td>

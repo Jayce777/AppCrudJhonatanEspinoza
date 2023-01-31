@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormControl, FormGroup } from '@angular/forms';
 import {EnterpriseDTO,EnterpriseUpdateDTO}from './Enterprise';
-import{AppToastService,ToastInfo}from '../toast/toast.service';
 
 @Component({
   selector: 'app-enterprise',
@@ -50,7 +49,7 @@ export class EnterpriseComponent implements OnInit {
 
 
   constructor(private enterpriseService: EnterpriseService, private router: Router,
-    private modalService: NgbModal,public toastService: AppToastService) { }
+    private modalService: NgbModal) { }
 
   ngOnInit(): void {
 
@@ -94,7 +93,6 @@ export class EnterpriseComponent implements OnInit {
     .subscribe(
       response => {
         const {message}=response;
-        this.toastService.show('Enterprise',message);
         console.log(response);
         this.retrieveEnterprises();
       },
@@ -114,7 +112,6 @@ export class EnterpriseComponent implements OnInit {
     .subscribe(
       response => {
         const {message}=response;
-        this.toastService.show('Enterprise',message);
         console.log(response);
         this.retrieveEnterprises();
       },

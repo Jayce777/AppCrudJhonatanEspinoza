@@ -1,27 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Injectable } from '@angular/core';
-import { AuthService } from './app.service';
-import { Login } from './auth';
 import { Router } from '@angular/router';
+import { AuthService } from '../autentication/app.service';
+import { Login } from '../autentication/auth';
+import { Location } from '@angular/common'
+
+
 @Component({
-  selector: 'app-autentication',
-  templateUrl: './autentication.component.html',
+  selector: 'app-register',
+  templateUrl: './register.component.html',
   providers: [AuthService],
-  styleUrls: ['./autentication.component.css']
+  styleUrls: ['./register.component.css']
 })
+export class RegisterComponent {
 
-
-@Injectable()
-export class AutenticationComponent implements OnInit {
-  title = 'appKnownlegdeJE';
   email = '';
   password = '';
   public loginValid = true;
+  messageLogin='';
 
-  messageCannotLogin='';
-
-  constructor(private authsService: AuthService, private router: Router) { }
+  constructor(private authsService: AuthService, private router: Router,
+    private location: Location) { }
 
   loginForm = new FormGroup({
     email: new FormControl(''),
@@ -37,15 +36,17 @@ export class AutenticationComponent implements OnInit {
 
     const responseAutentication: Login = { email, password } as Login;
     this.authsService
-      .autenticateLogin(responseAutentication)
+      .register(responseAutentication)
       .subscribe(response => {
+        this.messageLogin='User created successfuly!';
         this.loginValid = true;
         this.getToken(response.token);
         this.loginSuccess();
       },err => {
         const {error}=err;
-        this.messageCannotLogin='Email/Password is incorrect';
-        ;
+
+        console.log(err);
+        this.messageLogin='Email/Password is incorrect';
         this.loginValid = false;
       })
 
@@ -61,5 +62,8 @@ export class AutenticationComponent implements OnInit {
     }, 3000);
   }
 
+  back(): void {
+    this.location.back()
+  }
 
 }

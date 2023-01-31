@@ -3,7 +3,6 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { EnterpriseService } from '../enterprise/enterprises.service';
-import { AppToastService } from '../toast/toast.service';
 import { EmployeeDTO, EmployeeUpdateDTO } from './Employee';
 import { EmployeeService } from './employee.service';
 @Component({
@@ -55,7 +54,7 @@ export class EmployeesComponent implements OnInit {
 
   constructor(private employeService: EmployeeService,
     private enterpriseService: EnterpriseService, private router: Router,
-    private modalService: NgbModal, public toastService: AppToastService) { }
+    private modalService: NgbModal) { }
 
   ngOnInit(): void {
 

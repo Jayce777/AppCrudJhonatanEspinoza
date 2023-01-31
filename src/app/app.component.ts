@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import {ToastComponent} from './toast/toast.component'
 
 @Component({
   selector: 'app-root',
@@ -10,7 +9,5 @@ import {ToastComponent} from './toast/toast.component'
 
 export class AppComponent {
   title = 'appKnownlegdeJE';
-    constructor(private toast:ToastComponent){
-      
-    }
+    
 }
