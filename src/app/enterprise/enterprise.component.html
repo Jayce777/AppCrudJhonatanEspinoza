@@ -1,0 +1,139 @@
+<ngb-toast
+  *ngFor="let toast of toastService.toasts"
+  [header]="toast.header" [autohide]="true" [delay]="toast.delay || 5000"
+  (hiddden)="toastService.remove(toast)"
+>{{toast.body}}</ngb-toast>
+
+
+<div class="container">
+
+
+  <p><button type="button" class="btn btn-primary" (click)="mostrarModalInfo()">Create a new enterprise</button></p>
+
+<ng-template #myModalInfo let-modal>
+ 
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">Create</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modal.close()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="enterpriseForm" (ngSubmit)="onCreate()">
+        <div class="form-outline mb-4">
+          <label for="email">Name: </label>
+        <input [(ngModel)]="name"  type="text"  formControlName="name"  class="form-control form-control-lg">
+        </div>
+    
+        <div class="form-outline mb-4">
+          <label for="password">Address: </label>
+        <input [(ngModel)]="address" id="text" type="text"  formControlName="address" class="form-control form-control-lg">
+        </div>
+        <div class="form-outline mb-4">
+          <label for="password">Phone: </label>
+        <input [(ngModel)]="phone" id="text" type="text"  formControlName="phone"  class="form-control form-control-lg">
+        </div>
+
+        <button class="btn btn-primary btn-lg btn-block" type="submit">Create</button>
+
+      </form>
+    </div>
+   
+  </div>
+ 
+</ng-template>
+ 
+<ng-template #myModalConf let-modal>
+ 
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">Edit enterprise</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modal.close('Cerrado desde la ventana')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-body">
+        <form [formGroup]="enterpriseUpdateForm" (ngSubmit)="onEdit()">
+          <div class="form-outline mb-4">
+            <label for="email">Id: </label>
+          <input [(ngModel)]="idEnterprise"  type="text"  formControlName="idEnterprise"   class="form-control form-control-lg">
+          </div>
+          <div class="form-outline mb-4">
+            <label for="email">Name: </label>
+          <input [(ngModel)]="nameUpdate"  type="text"  formControlName="nameUpdate"  class="form-control form-control-lg">
+          </div>
+      
+          <div class="form-outline mb-4">
+            <label for="password">Address: </label>
+          <input [(ngModel)]="addressUpdate" id="text" type="text"  formControlName="addressUpdate" class="form-control form-control-lg">
+          </div>
+          <div class="form-outline mb-4">
+            <label for="password">Phone: </label>
+          <input [(ngModel)]="phoneUpdate" id="text" type="text"  formControlName="phoneUpdate"  class="form-control form-control-lg">
+          </div>
+  
+          <button class="btn btn-primary btn-lg btn-block" type="submit">Modify</button>
+  
+        </form>
+      </div>
+    </div>
+   
+  </div>
+ 
+</ng-template>
+
+
+  <p *ngIf="dataCount==0">Don´t exist records</p>
+
+<table   class="table table-bordered table-stripped">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">name</th>
+        <th scope="col">phone</th>
+        <th scope="col">address</th>
+        <th scope="col">created_by</th>
+        <th scope="col">created_date</th>
+        <th scope="col">modified_by</th>
+        <th scope="col">modified_date</th>
+        <th scope="col">status</th>
+        <th scope="col">actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr   *ngFor="let enterprise of dataEnterprise;let i=index">
+       <td>{{enterprise.id}}</td>
+       <td>{{enterprise.name}}</td>
+       <td>{{enterprise.phone}}</td>
+       <td>{{enterprise.address}}</td>
+       <td>{{enterprise.created_by}}</td>
+       <td>{{enterprise.created_date}}</td>
+       <td>{{enterprise.modified_by}}</td>
+       <td>{{enterprise.modified_date}}</td>
+       <td>{{enterprise.status}}</td>
+     
+      <td>
+        <button type="button" class="btn btn-secondary" (click)="showEnterprise($event,enterprise)">Edit</button>
+      </td>
+      </tr>
+     
+    </tbody>
+    <tfoot>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">name</th>
+        <th scope="col">phone</th>
+        <th scope="col">address</th>
+        <th scope="col">created_by</th>
+        <th scope="col">created_date</th>
+        <th scope="col">modified_by</th>
+        <th scope="col">modified_date</th>
+        <th scope="col">status</th>
+        <th scope="col">actions</th>
+      </tr>
+    </tfoot>
+  </table>
+
+</div>

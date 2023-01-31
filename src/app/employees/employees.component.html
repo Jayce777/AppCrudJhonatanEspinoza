@@ -1,0 +1,178 @@
+
+
+
+<div class="container">
+
+  <p><button type="button" class="btn btn-primary" (click)="mostrarModalInfo()">Create a new employee</button></p>
+
+<ng-template #myModalInfo let-modal>
+
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">Create</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modal.close()">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="employeeForm" (ngSubmit)="onCreate()">
+                <div class="form-outline mb-4">
+                    <label for="email">Name: </label>
+                    <input [(ngModel)]="name" type="text" formControlName="name"
+                        class="form-control form-control-lg">
+                </div>
+
+                <div class="form-outline mb-4">
+                    <label for="password">Surname: </label>
+                    <input [(ngModel)]="surname" id="text" type="text" formControlName="surname"
+                        class="form-control form-control-lg">
+                </div>
+                <div class="form-outline mb-4">
+                    <label for="password">Age: </label>
+                    <input [(ngModel)]="age" id="text" type="text" formControlName="age"
+                        class="form-control form-control-lg">
+                </div>
+                <div class="form-outline mb-4">
+                  <label for="password">Email: </label>
+                  <input [(ngModel)]="email" id="text" type="text" formControlName="email"
+                      class="form-control form-control-lg">
+              </div>
+                <div class="form-outline mb-4">
+                  <label for="password">Position: </label>
+                  <input [(ngModel)]="position" id="text" type="text" formControlName="position"
+                      class="form-control form-control-lg">
+              </div>
+               <!--  <div class="form-outline mb-4">
+                    <select name="enterpriseSelect" formControlName="enterpriseSelect"
+                        (change)="changeEnterprise($event)"
+                       class="custom-select mb-3">
+                        <option [value]="" [selected] [disabled]>Select an enterprise</option>
+                        <option *ngFor="let enterprise of dataEmployee" [ngValue]="enterprise.id">
+                            {{enterprise.name}}
+                        </option>
+                    </select>
+                </div> -->
+                <button class="btn btn-primary btn-lg btn-block" type="submit">Create</button>
+
+            </form>
+        </div>
+       
+    </div>
+
+</ng-template>
+
+
+
+<ng-template #myModalConf let-modal>
+ 
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">Edit employee</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modal.close('Cerrado desde la ventana')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+      <div class="modal-body">
+        <form [formGroup]="employeeUpdateForm" (ngSubmit)="onEdit()">
+          <div class="form-outline mb-4">
+            <label for="id">Id: </label>
+          <input [(ngModel)]="idemployee"  type="text"  formControlName="idemployee"   class="form-control form-control-lg">
+          </div>
+          <div class="form-outline mb-4">
+            <label for="name">Name: </label>
+          <input [(ngModel)]="nameUpdate"  type="text"  formControlName="nameUpdate"  class="form-control form-control-lg">
+          </div>
+      
+          <div class="form-outline mb-4">
+            <label for="surname">Surname: </label>
+          <input [(ngModel)]="surnameUpdate" id="text" type="text"  formControlName="surnameUpdate" class="form-control form-control-lg">
+          </div>
+          <div class="form-outline mb-4">
+            <label for="age">Age: </label>
+          <input [(ngModel)]="ageUpdate" id="text" type="text"  formControlName="ageUpdate"  class="form-control form-control-lg">
+          </div>
+          <div class="form-outline mb-4">
+            <label for="age">Email: </label>
+          <input [(ngModel)]="emailUpdate" id="text" type="text"  formControlName="emailUpdate"  class="form-control form-control-lg">
+          </div>
+          <div class="form-outline mb-4">
+            <label for="age">Position: </label>
+          <input [(ngModel)]="positionUpdate" id="text" type="text"  formControlName="positionUpdate"  class="form-control form-control-lg">
+          </div>
+          <div class="form-outline mb-4">
+            <label for="password">Status: </label>
+            <input [(ngModel)]="statusUpdate" type="checkbox" formControlName="statusUpdate"
+               >
+        </div>
+          <button class="btn btn-primary btn-lg btn-block" type="submit">Modify</button>
+  
+        </form>
+      </div>
+    </div>
+    
+  </div>
+ 
+</ng-template>
+
+
+    <p *ngIf="dataCount==0">Don´t exist records</p>
+
+    <table   class="table table-bordered table-stripped">
+    <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">name</th>
+        <th scope="col">lastname</th>
+        <th scope="col">age</th>
+        <th scope="col">email</th>
+        <th scope="col">position</th>
+        <th scope="col">created_by</th>
+        <th scope="col">created_date</th>
+        <th scope="col">modified_by</th>
+        <th scope="col">modified_date</th>
+        <th scope="col">status</th>
+        <th scope="col">actions</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr   *ngFor="let employee of dataEmployee;let i=index">
+       <td>{{employee.id}}</td>
+       <td>{{employee.name}}</td>
+       <td>{{employee.surname}}</td>
+       <td>{{employee.age}}</td>
+       <td>{{employee.email}}</td>
+       <td>{{employee.position}}</td>
+       <td>{{employee.created_by}}</td>
+       <td>{{employee.created_date}}</td>
+       <td>{{employee.modified_by}}</td>
+       <td>{{employee.modified_date}}</td>
+       <td>{{employee.status}}</td>
+     
+      <td>
+        <button type="button" class="btn btn-secondary" (click)="showEmployee($event,employee)">Edit</button>
+      </td>
+    
+      </tr>
+     
+    </tbody>
+    <tfoot>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col">name</th>
+        <th scope="col">lastname</th>
+        <th scope="col">age</th>
+        <th scope="col">email</th>
+        <th scope="col">position</th>
+        <th scope="col">created_by</th>
+        <th scope="col">created_date</th>
+        <th scope="col">modified_by</th>
+        <th scope="col">modified_date</th>
+        <th scope="col">status</th>
+        <th scope="col">actions</th>
+
+      </tr>
+    </tfoot>
+  </table>
+    </div>
